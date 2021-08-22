@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-let currentImg;
 const gallery = document.querySelector('.gallery');
 
 function addItems(arr) {
@@ -26,17 +25,12 @@ function addItems(arr) {
   gallery.append(...arrItems);
 }
 addItems(galleryItems);
-console.log(gallery);
 
-let lightbox = new SimpleLightbox('.gallery__item');
-lightbox.on('show.simplelightbox', function (e) {
-  // Посмотри в документации секцию «Options» и
-  // добавь отображение подписей к изображениям из атрибута alt.
-  // Пусть подпись будет снизу и появляется через 250 миллисекунд
-  // после открытия изображения.
-
-  currentImg = e.target.children[0];
-  let caption = currentImg.getAttribute('alt');
-  console.log(caption);
-  //   lightbox.captionType(caption); - не работает
+let lightbox = new SimpleLightbox('.gallery__item', {
+  caption: true,
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: '250',
 });
+lightbox.on('show.simplelightbox');
